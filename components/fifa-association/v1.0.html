@@ -1,21 +1,81 @@
 <!--
-FIFA RED COMPONENT
+============================================================
+FIFA RED COMPONENT — CONFIGURATION
+============================================================
 Name: FIFA-ASSOCIATION
 Version: 1.0
 Type: Generic drag-and-drop association
 Dependencies: None
 
-PARAMETERIZATION
-- Change title, subtitle, intro and optional image.
-- Each drop zone uses data-answer="answer-X".
-- Each draggable answer uses id="answer-X".
-- To add a zone, copy a <tr> block and assign a matching answer ID.
-- To add an answer, copy a .fifa-association-answer block.
+IMPORTANT:
+Edit only the CONFIGURATION section below when creating a new exercise.
+Do not modify the CSS or interaction engine unless you are developing
+or extending the component itself.
+
+------------------------------------------------------------
+CONFIGURATION
+------------------------------------------------------------
+
+TITLE:
+Question - Autour du ballon
+
+SUBTITLE:
+Associe les informations correctes aux caractéristiques demandées.
+
+INTRO:
+Tu trouveras de l'aide dans le livre des Lois du jeu,
+au chapitre Loi 2 - Le ballon.
+
+IMAGE:
+https://referee.easylearn.ch/data/content/1/assets/20240213092008580-2D8A-9117D132/der_ball%281%29.png
+
+IMAGE ALT TEXT:
+Ballon
+
+SECTION TITLE:
+Associe les caractéristiques et les informations
+
+------------------------------------------------------------
+ASSOCIATIONS
+------------------------------------------------------------
+
+ZONE 1 | LABEL: Forme         | CORRECT ANSWER: answer-1
+ZONE 2 | LABEL: Poids         | CORRECT ANSWER: answer-2
+ZONE 3 | LABEL: Circonférence | CORRECT ANSWER: answer-3
+ZONE 4 | LABEL: Pression      | CORRECT ANSWER: answer-4
+
+------------------------------------------------------------
+ANSWERS
+------------------------------------------------------------
+
+answer-1 = rond
+answer-2 = 410 - 450 grammes
+answer-3 = 68 - 70 centimètres
+answer-4 = 0.6 - 1.1 bar
+
+------------------------------------------------------------
+HOW TO ADD A ZONE
+------------------------------------------------------------
+1. Copy an existing zone <tr> block.
+2. Give it a new zone ID, e.g. fifa-association-zone-5.
+3. Set data-answer to the ID of the correct answer.
+4. Change the visible label.
+
+HOW TO ADD AN ANSWER
+------------------------------------------------------------
+1. Copy an existing .fifa-association-answer block.
+2. Give it a unique ID, e.g. answer-5.
+3. Change its visible text.
+4. Reference that ID from the corresponding data-answer.
 
 FIFA RED ARCHITECTURE
-- CSS lives in <style>; avoid inline style="...".
+------------------------------------------------------------
+- CSS lives in <style> and should not be written inline.
+- Structure uses standard HTML and semantic classes.
 - Interaction uses inline event handlers.
 - No external JavaScript dependencies.
+- Validation discovers all .fifa-association-drop-zone elements dynamically.
+============================================================
 -->
 
 <style>
@@ -65,17 +125,46 @@ FIFA RED ARCHITECTURE
 
 <div class="fifa-association-intro">Tu trouveras de l'aide dans le livre des Lois du jeu, au chapitre <strong>Loi 2 - Le ballon</strong>.</div>
 
-<div class="fifa-association-image">
-<img src="https://referee.easylearn.ch/data/content/1/assets/20240213092008580-2D8A-9117D132/der_ball%281%29.png" alt="Ballon" width="208">
-</div>
+<div class="fifa-association-image"><img src="https://referee.easylearn.ch/data/content/1/assets/20240213092008580-2D8A-9117D132/der_ball%281%29.png" alt="Ballon" width="208"></div>
 
 <div class="fifa-association-section-title">Associe les caractéristiques et les informations</div>
 
 <table class="fifa-association-grid">
-<tr><td class="fifa-association-label">Forme</td><td class="fifa-association-drop-cell"><div id="fifa-association-zone-1" class="fifa-association-drop-zone" data-answer="answer-1" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}"><div class="fifa-association-placeholder">Dépose la réponse ici</div></div></td></tr>
-<tr><td class="fifa-association-label">Poids</td><td class="fifa-association-drop-cell"><div id="fifa-association-zone-2" class="fifa-association-drop-zone" data-answer="answer-2" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}"><div class="fifa-association-placeholder">Dépose la réponse ici</div></div></td></tr>
-<tr><td class="fifa-association-label">Circonférence</td><td class="fifa-association-drop-cell"><div id="fifa-association-zone-3" class="fifa-association-drop-zone" data-answer="answer-3" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}"><div class="fifa-association-placeholder">Dépose la réponse ici</div></div></td></tr>
-<tr><td class="fifa-association-label">Pression</td><td class="fifa-association-drop-cell"><div id="fifa-association-zone-4" class="fifa-association-drop-zone" data-answer="answer-4" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}"><div class="fifa-association-placeholder">Dépose la réponse ici</div></div></td></tr>
+<tr>
+<td class="fifa-association-label">Forme</td>
+<td class="fifa-association-drop-cell">
+<div id="fifa-association-zone-1" class="fifa-association-drop-zone" data-answer="answer-1" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}}">
+<div class="fifa-association-placeholder">Dépose la réponse ici</div>
+</div>
+</td>
+</tr>
+
+<tr>
+<td class="fifa-association-label">Poids</td>
+<td class="fifa-association-drop-cell">
+<div id="fifa-association-zone-2" class="fifa-association-drop-zone" data-answer="answer-2" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}}">
+<div class="fifa-association-placeholder">Dépose la réponse ici</div>
+</div>
+</td>
+</tr>
+
+<tr>
+<td class="fifa-association-label">Circonférence</td>
+<td class="fifa-association-drop-cell">
+<div id="fifa-association-zone-3" class="fifa-association-drop-zone" data-answer="answer-3" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}}">
+<div class="fifa-association-placeholder">Dépose la réponse ici</div>
+</div>
+</td>
+</tr>
+
+<tr>
+<td class="fifa-association-label">Pression</td>
+<td class="fifa-association-drop-cell">
+<div id="fifa-association-zone-4" class="fifa-association-drop-zone" data-answer="answer-4" ondragover="event.preventDefault();this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="event.preventDefault();this.classList.remove('drag-over');var itemId=event.dataTransfer.getData('text/plain');var item=document.getElementById(itemId);if(item){var old=this.querySelector('.fifa-association-answer');if(old&&old!==item){document.querySelector('.fifa-association-answers').appendChild(old);}var oldParent=item.parentNode;if(oldParent&&oldParent.id&&oldParent.id.indexOf('fifa-association-zone-')===0&&oldParent!==this){oldParent.innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';}this.innerHTML='';this.appendChild(item);document.getElementById('fifa-association-feedback').innerHTML='';}}">
+<div class="fifa-association-placeholder">Dépose la réponse ici</div>
+</div>
+</td>
+</tr>
 </table>
 
 <div class="fifa-association-bank">
@@ -90,12 +179,11 @@ FIFA RED ARCHITECTURE
 </div>
 
 <div class="fifa-association-actions">
-<button class="fifa-association-button fifa-association-check" type="button" onclick="var zones=document.querySelectorAll('.fifa-association-drop-zone');var correct=0;for(var i=0;i<zones.length;i++){var zone=zones[i];var answer=zone.querySelector('.fifa-association-answer');zone.classList.remove('correct');zone.classList.remove('incorrect');if(answer&&answer.id===zone.getAttribute('data-answer')){zone.classList.add('correct');correct++;}else{zone.classList.add('incorrect');}}if(correct===zones.length){document.getElementById('fifa-association-feedback').className='fifa-association-feedback success';document.getElementById('fifa-association-feedback').innerHTML='<div class=\'fifa-association-feedback-title\'>✓ Ok !</div><div>Toutes les associations sont correctes.</div>';}else{document.getElementById('fifa-association-feedback').className='fifa-association-feedback error';document.getElementById('fifa-association-feedback').innerHTML='<div class=\'fifa-association-feedback-title\'>Pas encore !</div><div>'+correct+' association(s) correcte(s) sur '+zones.length+'. Vérifie les zones marquées en rouge et essaie à nouveau.</div>';} ">✓ Vérifier</button>
+<button class="fifa-association-button fifa-association-check" type="button" onclick="var zones=document.querySelectorAll('.fifa-association-drop-zone');var correct=0;for(var i=0;i<zones.length;i++){var zone=zones[i];var answer=zone.querySelector('.fifa-association-answer');zone.classList.remove('correct');zone.classList.remove('incorrect');if(answer&&answer.id===zone.getAttribute('data-answer')){zone.classList.add('correct');correct++;}else{zone.classList.add('incorrect');}}if(correct===zones.length){document.getElementById('fifa-association-feedback').className='fifa-association-feedback success';document.getElementById('fifa-association-feedback').innerHTML='<div class=\'fifa-association-feedback-title\'>✓ Ok !</div><div>Toutes les associations sont correctes.</div>';}else{document.getElementById('fifa-association-feedback').className='fifa-association-feedback error';document.getElementById('fifa-association-feedback').innerHTML='<div class=\'fifa-association-feedback-title\'>Pas encore !</div><div>'+correct+' association(s) correcte(s) sur '+zones.length+'. Vérifie les zones marquées en rouge et essaie à nouveau.</div>';}">✓ Vérifier</button>
 <button class="fifa-association-button fifa-association-reset" type="button" onclick="var bank=document.querySelector('.fifa-association-answers');var answers=document.querySelectorAll('.fifa-association-answer');for(var i=0;i<answers.length;i++){bank.appendChild(answers[i]);}var zones=document.querySelectorAll('.fifa-association-drop-zone');for(var j=0;j<zones.length;j++){zones[j].innerHTML='<div class=\'fifa-association-placeholder\'>Dépose la réponse ici</div>';zones[j].classList.remove('correct');zones[j].classList.remove('incorrect');}document.getElementById('fifa-association-feedback').className='fifa-association-feedback';document.getElementById('fifa-association-feedback').innerHTML='';">Réinitialiser</button>
 </div>
 
 <div id="fifa-association-feedback" class="fifa-association-feedback"></div>
-
 <div class="fifa-association-tip"><em>Si tu ne réponds pas correctement du premier coup, recommence l'exercice et consulte à nouveau les informations nécessaires.</em></div>
 
 </div>
